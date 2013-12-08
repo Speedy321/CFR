@@ -1,5 +1,6 @@
 package speedy3210.cfr;
 
+import speedy3210.cfr.gui.GuiHandler;
 import speedy3210.cfr.items.ItemClipboard;
 import speedy3210.cfr.proxies.CommonProxy;
 import net.minecraft.block.Block;
@@ -61,14 +62,18 @@ public class cfr {
         
         @EventHandler
         public void load(FMLInitializationEvent event) {
-                proxy.registerRenderers();
-                
+        	
+        		proxy.registerRenderers();
+        		
+        		new GuiHandler();
+        		               
                 //items
                 Clipboard = new ItemClipboard(Clipboard_ID).setUnlocalizedName(modInfos.Clipboard_UnlocName).setCreativeTab(CreativeTabs.tabFood).setMaxStackSize(1).setTextureName("cfr:clipboard");
                
                 //basic frame
     			addRecipes();
                 addNames();
+                
         }
         
         //basic frame
