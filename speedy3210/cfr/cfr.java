@@ -1,13 +1,16 @@
 package speedy3210.cfr;
 
+import speedy3210.cfr.items.ItemClipboard;
 import speedy3210.cfr.proxies.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ConfigCategory;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
@@ -35,8 +38,11 @@ public class cfr {
         public static CommonProxy proxy;
         
         //items
+        public static Item Clipboard;
         
         //ids
+        
+        int Clipboard_ID;
     	
     	//others
         
@@ -47,6 +53,8 @@ public class cfr {
         	
         	config.load();
         	
+        	Clipboard_ID = config.getItem(modInfos.Cliboard_Key, modInfos.Clipboard_DefID).getInt();
+        	
         	config.save();
         	
         }
@@ -56,6 +64,7 @@ public class cfr {
                 proxy.registerRenderers();
                 
                 //items
+                Clipboard = new ItemClipboard(Clipboard_ID).setUnlocalizedName(modInfos.Clipboard_UnlocName).setCreativeTab(CreativeTabs.tabFood).setMaxStackSize(1).setTextureName("cfr:clipboard");
                
                 //basic frame
     			addRecipes();
@@ -65,14 +74,15 @@ public class cfr {
         //basic frame
         private void addRecipes() {
         	
-        	
+        	GameRegistry.addRecipe(new ItemStack(Clipboard), new Object[] { "111", "111", "432", '1', Item.paper, '4', Item.feather, '3', Block.planks, '2', Item.dyePowder});
+        	GameRegistry.addRecipe(new ItemStack(Clipboard), new Object[] { "111", "111", "234", '1', Item.paper, '2', Item.feather, '3', Block.planks, '4', Item.dyePowder});
         	
 		}
         
         //basic frame
 		private void addNames() {
 			
-			
+			LanguageRegistry.addName(Clipboard, modInfos.Clipboard_LocName);
 			
 		}
 		
